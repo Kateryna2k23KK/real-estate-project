@@ -8,37 +8,58 @@
 </head>
 <body>
     <header>
-        <h1>Analysis - Real Estate Price Prediction</h1>
+        <!-- Insert horizontal image as header -->
+        <img src="assets/rs1.JPEG" alt="Real Estate Analysis" style="width: 100%; height: auto;">
     </header>
 
     <main>
+        <!-- Task and Goal -->
         <section>
-            <h2>1. Data Analysis</h2>
-            <p>In this section, we conduct a preliminary analysis of the real estate data, handle missing values, and explore key features that impact the sale price.</p>
-            <ul>
-                <li><strong>Initial Data Overview:</strong> We begin by inspecting the first few rows of the dataset, checking the data types, and looking for any immediate issues.</li>
-                <li><strong>Missing Values Handling:</strong> Missing data is filled using appropriate strategies, including median, mode, or dropping rows with excessive missing values.</li>
-                <li><strong>Feature Engineering:</strong> Categorical features are transformed using One-Hot Encoding to make the data suitable for machine learning models.</li>
-            </ul>
-            <p>Below is a summary of the preprocessing steps:</p>
-            <pre>
-                # Example code for data preprocessing
-                train_data['LotFrontage'] = train_data['LotFrontage'].fillna(train_data['LotFrontage'].median())
-                train_data['MasVnrType'] = train_data['MasVnrType'].fillna(train_data['MasVnrType'].mode()[0])
-                # And so on for other features...
-            </pre>
+            <h2><strong>Task:</strong></h2>
+            <p>The task of this project is to analyze a real estate dataset, predict house prices, and evaluate the performance of different machine learning models.</p>
+            
+            <h2><strong>Goal:</strong></h2>
+            <p>The goal is to apply machine learning techniques, perform feature engineering, and evaluate the models using metrics like RMSE and R².</p>
         </section>
 
+        <!-- Step 2: Data Analysis -->
         <section>
-            <h2>2. Model Results</h2>
-            <p>After preprocessing the data, we train multiple models to predict house prices. The models used include:</p>
-            <ul>
-                <li><strong>Linear Regression:</strong> A simple model that assumes a linear relationship between features and the target.</li>
-                <li><strong>Random Forest:</strong> An ensemble method that uses multiple decision trees to improve prediction accuracy.</li>
-                <li><strong>XGBoost:</strong> A gradient boosting technique that excels in performance and handles overfitting well.</li>
-            </ul>
+            <h2><strong>#2 Initial Data Analysis</strong></h2>
+            <p>In this section, we begin with an initial exploration of the dataset, handle missing values, and prepare the data for machine learning models.</p>
+            
+            <h3>1. Data Overview</h3>
+            <pre>
+                # Example code for loading the dataset and viewing the first rows
+                import pandas as pd
+                data = pd.read_csv('train.csv')
+                print(data.head())
+            </pre>
+            <p>We load the dataset and display the first few rows to understand its structure and check for any missing values.</p>
 
-            <p>Here are the results of each model's performance based on RMSE (Root Mean Squared Error) and R² (coefficient of determination):</p>
+            <h3>2. Handling Missing Values</h3>
+            <pre>
+                # Fill missing values with the median for numerical columns
+                data['LotFrontage'] = data['LotFrontage'].fillna(data['LotFrontage'].median())
+                data['MasVnrType'] = data['MasVnrType'].fillna(data['MasVnrType'].mode()[0])
+                # Further preprocessing steps
+            </pre>
+            <p>Missing values are handled using the median for numerical features and the mode for categorical features. This ensures the data is ready for machine learning models.</p>
+
+            <h3>3. Feature Engineering</h3>
+            <p>Categorical variables are transformed using One-Hot Encoding to make them suitable for model training:</p>
+            <pre>
+                # Apply One-Hot Encoding
+                data = pd.get_dummies(data, drop_first=True)
+            </pre>
+            <p>Now the data is prepared for machine learning algorithms, with categorical variables properly encoded.</p>
+        </section>
+
+        <!-- Step 3: Model Training and Results -->
+        <section>
+            <h2><strong>#3 Model Training and Results</strong></h2>
+            <p>After preprocessing, we train three different models to predict house prices: Linear Regression, Random Forest, and XGBoost. Below are the performance results:</p>
+
+            <h3>1. Model Performance</h3>
             <table>
                 <thead>
                     <tr>
@@ -66,44 +87,62 @@
                 </tbody>
             </table>
             
-            <p>The best performing model is XGBoost, with the lowest RMSE and highest R² value, indicating superior predictive power.</p>
-            
-            <h3>Visualizing Model Performance</h3>
-            <p>Below are visualizations of actual vs predicted prices and the distribution of residuals for the XGBoost model:</p>
-            
+            <p>The best performing model is XGBoost, which provides the lowest RMSE and highest R², indicating its superior predictive ability.</p>
+
+            <!-- Visualizing results -->
+            <h3>2. Visualizations</h3>
+            <p>Below are visualizations comparing actual vs predicted house prices and the distribution of residuals for the XGBoost model:</p>
+
             <h4>1. Actual vs Predicted Prices (XGBoost)</h4>
-            <img src="assets/graph1.png" alt="Actual vs Predicted Prices" class="result-image">
-            
+            <img src="assets/actual_vs_predicted.png" alt="Actual vs Predicted Prices" class="result-image">
+
             <h4>2. Residuals Distribution</h4>
-            <img src="assets/graph2.png" alt="Residuals Distribution" class="result-image">
+            <img src="assets/residuals_distribution.png" alt="Residuals Distribution" class="result-image">
         </section>
 
+        <!-- Step 4: Feature Importance -->
         <section>
-            <h2>3. Feature Importance</h2>
-            <p>One of the key strengths of machine learning models like XGBoost is their ability to provide feature importance. We use SHAP (SHapley Additive exPlanations) to explain the contribution of each feature to the model's predictions.</p>
+            <h2><strong>#4 Feature Importance</strong></h2>
+            <p>Using the XGBoost model, we analyze the importance of different features using SHAP (SHapley Additive exPlanations) values:</p>
             <img src="assets/feature_importance.png" alt="Feature Importance" class="result-image">
-            <p>The most important features for predicting house prices include:</p>
+            <p>The most important features influencing house prices are:</p>
             <ul>
-                <li><strong>OverallQual:</strong> Overall material and finish quality of the house.</li>
+                <li><strong>OverallQual:</strong> Overall quality of the house.</li>
                 <li><strong>GrLivArea:</strong> Above grade (ground) living area in square feet.</li>
-                <li><strong>GarageCars:</strong> Size of the garage in terms of car capacity.</li>
-                <li>...and more.</li>
+                <li><strong>GarageCars:</strong> Number of cars the garage can hold.</li>
             </ul>
         </section>
 
+        <!-- Step 5: Hyperparameter Tuning -->
         <section>
-            <h2>4. Model Hyperparameter Tuning</h2>
-            <p>We perform hyperparameter tuning using GridSearchCV to find the optimal parameters for Random Forest and XGBoost models. Below are the best parameters found:</p>
+            <h2><strong>#5 Model Tuning</strong></h2>
+            <p>We use GridSearchCV to tune the hyperparameters of Random Forest and XGBoost models. The best hyperparameters are as follows:</p>
             <ul>
-                <li><strong>Best Parameters for Random Forest:</strong> {'n_estimators': 200, 'max_depth': 20, ...}</li>
-                <li><strong>Best Parameters for XGBoost:</strong> {'learning_rate': 0.1, 'n_estimators': 100, ...}</li>
+                <li><strong>Best Random Forest Parameters:</strong> {'n_estimators': 200, 'max_depth': 20, ...}</li>
+                <li><strong>Best XGBoost Parameters:</strong> {'learning_rate': 0.1, 'n_estimators': 100, ...}</li>
             </ul>
-            <p>With these tuned parameters, the models show improved performance and better generalization on unseen data.</p>
+            <p>These hyperparameters lead to better model performance and higher generalization capabilities.</p>
         </section>
 
+        <!-- Final Thoughts and Example -->
         <section>
-            <h2>5. Code</h2>
-            <p>The full source code for this project, including data preprocessing, model training, and evaluation, is available in the <a href="code/">Code</a> folder.</p>
+            <h2><strong>#6 Conclusion and Example Usage</strong></h2>
+            <p>In this analysis, we successfully applied machine learning models to predict house prices. The XGBoost model performed the best. Below is an example of how to use the trained model for predictions:</p>
+            <pre>
+                # Example code for making predictions
+                import xgboost as xgb
+                model = xgb.XGBRegressor()
+                model.fit(X_train, y_train)
+                predictions = model.predict(X_test)
+                print(predictions)
+            </pre>
+            <p>This code demonstrates how to train and make predictions using the XGBoost model. After training, predictions can be made on new data.</p>
+        </section>
+
+        <!-- Code Folder Link -->
+        <section>
+            <h2>7. Code</h2>
+            <p>The full source code for this analysis, including data preprocessing, model training, and evaluation, is available in the <a href="code/">Code</a> folder.</p>
         </section>
     </main>
 
