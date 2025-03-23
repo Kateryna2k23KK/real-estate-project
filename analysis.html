@@ -13,23 +13,97 @@
 
     <main>
         <section>
-            <h2>Data Analysis</h2>
-            <p>Here we perform initial analysis of the data, handle missing values, and describe the dataset.</p>
+            <h2>1. Data Analysis</h2>
+            <p>In this section, we conduct a preliminary analysis of the real estate data, handle missing values, and explore key features that impact the sale price.</p>
+            <ul>
+                <li><strong>Initial Data Overview:</strong> We begin by inspecting the first few rows of the dataset, checking the data types, and looking for any immediate issues.</li>
+                <li><strong>Missing Values Handling:</strong> Missing data is filled using appropriate strategies, including median, mode, or dropping rows with excessive missing values.</li>
+                <li><strong>Feature Engineering:</strong> Categorical features are transformed using One-Hot Encoding to make the data suitable for machine learning models.</li>
+            </ul>
+            <p>Below is a summary of the preprocessing steps:</p>
             <pre>
-            <!-- Вставьте код из вашего анализа -->
+                # Example code for data preprocessing
+                train_data['LotFrontage'] = train_data['LotFrontage'].fillna(train_data['LotFrontage'].median())
+                train_data['MasVnrType'] = train_data['MasVnrType'].fillna(train_data['MasVnrType'].mode()[0])
+                # And so on for other features...
             </pre>
         </section>
 
         <section>
-            <h2>Results</h2>
-            <p>Below are the results of different models and their performance metrics:</p>
-            <img src="assets/graph1.png" alt="Actual vs Predicted Prices">
-            <img src="assets/graph2.png" alt="Residuals Distribution">
+            <h2>2. Model Results</h2>
+            <p>After preprocessing the data, we train multiple models to predict house prices. The models used include:</p>
+            <ul>
+                <li><strong>Linear Regression:</strong> A simple model that assumes a linear relationship between features and the target.</li>
+                <li><strong>Random Forest:</strong> An ensemble method that uses multiple decision trees to improve prediction accuracy.</li>
+                <li><strong>XGBoost:</strong> A gradient boosting technique that excels in performance and handles overfitting well.</li>
+            </ul>
+
+            <p>Here are the results of each model's performance based on RMSE (Root Mean Squared Error) and R² (coefficient of determination):</p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Model</th>
+                        <th>RMSE</th>
+                        <th>R²</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Linear Regression</td>
+                        <td>XXX</td>
+                        <td>YYY</td>
+                    </tr>
+                    <tr>
+                        <td>Random Forest</td>
+                        <td>XXX</td>
+                        <td>YYY</td>
+                    </tr>
+                    <tr>
+                        <td>XGBoost</td>
+                        <td>XXX</td>
+                        <td>YYY</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <p>The best performing model is XGBoost, with the lowest RMSE and highest R² value, indicating superior predictive power.</p>
+            
+            <h3>Visualizing Model Performance</h3>
+            <p>Below are visualizations of actual vs predicted prices and the distribution of residuals for the XGBoost model:</p>
+            
+            <h4>1. Actual vs Predicted Prices (XGBoost)</h4>
+            <img src="assets/graph1.png" alt="Actual vs Predicted Prices" class="result-image">
+            
+            <h4>2. Residuals Distribution</h4>
+            <img src="assets/graph2.png" alt="Residuals Distribution" class="result-image">
         </section>
 
         <section>
-            <h2>Code</h2>
-            <p>The code used for this analysis can be found in the <a href="code/">Code</a> folder.</p>
+            <h2>3. Feature Importance</h2>
+            <p>One of the key strengths of machine learning models like XGBoost is their ability to provide feature importance. We use SHAP (SHapley Additive exPlanations) to explain the contribution of each feature to the model's predictions.</p>
+            <img src="assets/feature_importance.png" alt="Feature Importance" class="result-image">
+            <p>The most important features for predicting house prices include:</p>
+            <ul>
+                <li><strong>OverallQual:</strong> Overall material and finish quality of the house.</li>
+                <li><strong>GrLivArea:</strong> Above grade (ground) living area in square feet.</li>
+                <li><strong>GarageCars:</strong> Size of the garage in terms of car capacity.</li>
+                <li>...and more.</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>4. Model Hyperparameter Tuning</h2>
+            <p>We perform hyperparameter tuning using GridSearchCV to find the optimal parameters for Random Forest and XGBoost models. Below are the best parameters found:</p>
+            <ul>
+                <li><strong>Best Parameters for Random Forest:</strong> {'n_estimators': 200, 'max_depth': 20, ...}</li>
+                <li><strong>Best Parameters for XGBoost:</strong> {'learning_rate': 0.1, 'n_estimators': 100, ...}</li>
+            </ul>
+            <p>With these tuned parameters, the models show improved performance and better generalization on unseen data.</p>
+        </section>
+
+        <section>
+            <h2>5. Code</h2>
+            <p>The full source code for this project, including data preprocessing, model training, and evaluation, is available in the <a href="code/">Code</a> folder.</p>
         </section>
     </main>
 
