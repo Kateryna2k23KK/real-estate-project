@@ -9,6 +9,7 @@
 <body>
     <!-- Image as header -->
     <header>
+        <!-- Ensure the image path is correct -->
         <img src="rs1.JPEG" alt="Real Estate Analysis" style="width: 100%; height: auto;">
     </header>
 
@@ -73,6 +74,7 @@
         <h3>Visualizations</h3>
 
         <h4>1. Actual vs Predicted Prices (XGBoost)</h4>
+        <!-- Ensure the image file names are correct and paths are relative -->
         <img src="actual_vs_predicted_prices.png" alt="Actual vs Predicted Prices" style="width: 100%; height: auto;">
 
         <h4>2. Residuals Distribution</h4>
@@ -80,21 +82,6 @@
 
         <h4>3. Feature Importance</h4>
         <img src="feature_importance.png" alt="Feature Importance" style="width: 100%; height: auto;">
-    </section>
-
-    <section>
-        <h2>4. Model Hyperparameter Tuning</h2>
-        <p>We perform hyperparameter tuning using GridSearchCV to find the optimal parameters for the Random Forest and XGBoost models. The best parameters found are:</p>
-        <ul>
-            <li><strong>Best Parameters for Random Forest:</strong> {'n_estimators': 200, 'max_depth': 20, ...}</li>
-            <li><strong>Best Parameters for XGBoost:</strong> {'learning_rate': 0.1, 'n_estimators': 100, ...}</li>
-        </ul>
-        <p>With these tuned parameters, the models show improved performance and better generalization on unseen data.</p>
-    </section>
-
-    <section>
-        <h2>5. Code</h2>
-        <p>The full source code for this project, including data preprocessing, model training, and evaluation, is available in the <strong>Code folder</strong>.</p>
     </section>
 
     <footer>
